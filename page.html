@@ -1,5 +1,7 @@
 <html>
   <head>
+    <script src=https://at.alicdn.com/t/font_390643_bck32bfxgxgh9f6r.js></script>
+    <link rel="stylesheet" href="page.css">
   </head>
   <body>
     <div id="app">
@@ -11,47 +13,52 @@
         <div class="signUp" v-if="actionType=='signUp'">
           <form  v-on:submit.prevent="signUp">
             <div class="formRow">
-              用户名<input type="text" v-model="formData.username">
+              用户名 <input type="text" v-model="formData.username">
             </div>
             <div class="formRow">
-              密码<input type="password" v-model="formData.password">
+              密　码 <input type="password" v-model="formData.password">
             </div>
             <div class="formActions">
-              <input type="submit" value="注册">
+              <input type="submit" value="注 册">
             </div>
           </form>
         </div>
         <div class="login" v-if="actionType=='login'">
           <form v-on:submit.prevent="login">
             <div class="formRow">
-              用户名<input type="text" v-model="formData.username">
+              用户名 <input type="text" v-model="formData.username">
             </div>
             <div class="formRow">
-              密码<input type="password" v-model="formData.password">
+              密　码 <input type="password" v-model="formData.password">
             </div>
             <div class="formActions">
-              <input type="submit" value="登入">
+              <input type="submit" value="登 入">
             </div>
           </form>
         </div>
       </section>
-      <section id="userInfo" v-if="currentUser">
+      <section id="todoPage" v-if="currentUser">
         <div id="userInfo">
-          <span>{{currentUser.username}}  </span>
+          <span>您好 {{currentUser.username}}  </span>
           <button v-on:click="logout">登出</button>
         </div>
-      </section>
-      <section id="todo" v-if="currentUser">
+        <div id="todoIcon">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-basic_todolist_pen"></use>
+          </svg>
+        </div>
         <div class="newTask">
-          <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+          <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo" placeholder="在此输入新的待办事项">
         </div>
           <ol class="todos">
             <li v-for="todo in todoList">
               <input type="checkbox" v-model="todo.done">
               {{ todo.title }}
-              <span v-if="todo.done">已完成</span>
-              <span v-else>未完成</span>
-          <button v-on:click="removeTodo(todo)">X</button>
+              <div id = rightside-items>
+                <span v-if="todo.done">已完成</span>
+                <span v-else>未完成</span>
+                <button v-on:click="removeTodo(todo)">X</button>
+              </div>
             </li>
           </ol>
         </div>
